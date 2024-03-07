@@ -56,9 +56,11 @@ jobs:
 
       - name: Deploy to Amazon EKS
         run: |
-          kubectl apply -f app.yaml
+          kubectl get all nodes 
           kubectl apply -f complete-demo.yaml --validate=false
+          kubectl apply -f app.yaml --validate=false
 
+          
 
 
 
