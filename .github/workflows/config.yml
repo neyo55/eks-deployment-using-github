@@ -53,16 +53,27 @@ jobs:
 
       # - name: Terraform destroy 
       #   id: destroy
-      #   run: terraform destroy --auto-approve -no-color   
-   
-      - name: Update Kube config
-        run: aws eks update-kubeconfig --name myapp-eks-cluster --region eu-west-2
+      #   run: terraform destroy --auto-approve -no-color 
+      
+      - name: AWS EKS with Kubectl
+        uses: giovannirossini/aws-eks@v1.0.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'eu-west-2'
+          cluster-name: 'myapp-eks-cluster'
+          command: |
+            kubectl apply -f complete-demo.yaml
 
-      - name: Deploy to Amazon EKS
-        run: |
-          sudo kubectl get all nodes 
-          sudo kubectl apply -f complete-demo.yaml --validate=false
-          kubectl apply -f app.yaml --validate=false
+   
+      # - name: Update Kube config
+      #   run: aws eks update-kubeconfig --name myapp-eks-cluster --region eu-west-2
+
+      # - name: Deploy to Amazon EKS
+      #   run: |
+      #     sudo kubectl get all nodes 
+      #     sudo kubectl apply -f complete-demo.yaml --validate=false
+      #     kubectl apply -f app.yaml --validate=false
 
           
 
