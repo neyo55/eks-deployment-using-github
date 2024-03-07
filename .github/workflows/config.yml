@@ -42,14 +42,14 @@ jobs:
         id: plan
         run: terraform plan -no-color
 
-       # tf apply
-      # - name: Terraform apply
-      #   id: apply
-      #   run: terraform apply --auto-approve -no-color
+       tf apply
+      - name: Terraform apply
+        id: apply
+        run: terraform apply --auto-approve -no-color
 
-      - name: Terraform destroy 
-        id: destroy
-        run: terraform destroy --auto-approve -no-color   
+      # - name: Terraform destroy 
+      #   id: destroy
+      #   run: terraform destroy --auto-approve -no-color   
    
       - name: Update Kube config
         run: aws eks update-kubeconfig --name myapp-eks-cluster --region eu-west-2
