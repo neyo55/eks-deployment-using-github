@@ -104,13 +104,6 @@ spec:
               - SETGID
               - SETUID
           readOnlyRootFilesystem: true
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1Gi
-          requests:
-            cpu: 100m
-            memory: 200Mi
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
@@ -237,13 +230,6 @@ spec:
         ports:
         - name: mysql
           containerPort: 3306
-        resources:
-          limits:
-            cpu: 200m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
@@ -432,13 +418,6 @@ spec:
               - SETGID
               - SETUID
           readOnlyRootFilesystem: true
-        resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 300Mi
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
@@ -623,25 +602,11 @@ spec:
               - SETUID
               - DAC_OVERRIDE
           readOnlyRootFilesystem: true
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1Gi
-          requests:
-            cpu: 100m
-            memory: 500Mi
       - name: rabbitmq-exporter
         image: kbudde/rabbitmq-exporter
         ports:
         - containerPort: 9090
           name: exporter
-        resources:
-          limits:
-            cpu: 200m
-            memory: 200Mi
-          requests:
-            cpu: 100m
-            memory: 100Mi
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
@@ -702,13 +667,6 @@ spec:
               - SETGID
               - SETUID
           readOnlyRootFilesystem: true
-        resources:
-          limits:
-            cpu: 500m
-            memory: 1Gi
-          requests:
-            cpu: 100m
-            memory: 500Mi
       nodeSelector:
         beta.kubernetes.io/os: linux
 ---
@@ -892,13 +850,7 @@ spec:
       containers:
       - name: user-db
         image: weaveworksdemos/user-db:0.3.0
-        resources:
-          limits:
-            cpu: 500m
-            memory: 500Mi
-          requests:
-            cpu: 200m
-            memory: 200Mi
+
         ports:
         - name: mongo
           containerPort: 27017
