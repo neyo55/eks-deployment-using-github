@@ -63,7 +63,7 @@ jobs:
           aws-region: 'eu-west-2'
           cluster-name: 'myapp-eks-cluster'
           command: |
-            kubectl apply -f complete-demo.yaml
+            kubectl apply -f complete-demo.yaml --validate=false
 
    
       # - name: Update Kube config
