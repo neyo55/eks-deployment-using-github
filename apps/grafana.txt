@@ -6,8 +6,6 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  source:
-    repoURL: https://github.com/neyo55/eks-deployment-using-github.git
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
@@ -21,7 +19,7 @@ spec:
     targetRevision: 6.52.2
     helm:
       valueFiles:
-        - eks-deployment-using-github/capstone/apps/apps-values/grafana.yaml         
+        - $capstone/apps/apps-values/grafana.yaml         
   syncPolicy:
     automated:
       prune: true
