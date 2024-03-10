@@ -47,13 +47,13 @@ jobs:
         run: terraform plan -no-color
 
       # tf apply
-      - name: Terraform apply
-        id: apply
-        run: terraform apply --auto-approve -no-color
+      # - name: Terraform apply
+      #   id: apply
+      #   run: terraform apply --auto-approve -no-color
 
-      # - name: Terraform destroy 
-      #   id: destroy
-      #   run: terraform destroy --auto-approve -no-color 
+      - name: Terraform destroy 
+        id: destroy
+        run: terraform destroy --auto-approve -no-color 
       
       - name: AWS EKS with Kubectl
         uses: giovannirossini/aws-eks@v1.0.1
