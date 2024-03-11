@@ -1,6 +1,6 @@
 # EKS Node Groups
-resource "aws_eks_node_group" "this" {
-  cluster_name    = aws_eks_cluster.this.name
+resource "aws_eks_node_group" "neyo-worker-ng" {
+  cluster_name    = aws_eks_cluster.myapp.name
   node_group_name = var.project
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = aws_subnet.private[*].id
@@ -30,7 +30,7 @@ resource "aws_eks_node_group" "this" {
 
 # EKS Node IAM Role
 resource "aws_iam_role" "node" {
-  name = "${var.project}-Worker-Role"
+  name = "eks-worker-role"
 
   assume_role_policy = <<POLICY
 {
@@ -66,9 +66,9 @@ resource "aws_iam_role_policy_attachment" "node_AmazonEC2ContainerRegistryReadOn
 
 # EKS Node Security Group
 resource "aws_security_group" "eks_nodes" {
-  name        = "${var.project}-node-sg"
+  name        = "eks-node-sg"
   description = "Security group for all nodes in the cluster"
-  vpc_id      = aws_vpc.this.id
+  vpc_id      = aws_vpc.neyo-capstone-vpc.id
 
   egress {
     from_port   = 0

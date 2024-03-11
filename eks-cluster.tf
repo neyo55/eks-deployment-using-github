@@ -1,7 +1,7 @@
 # EKS Cluster
-resource "aws_eks_cluster" "this" {
-  name     = "${var.project}-cluster"
-  role_arn = aws_iam_role.cluster.arn
+resource "aws_eks_cluster" "myapp" {
+  name     = "neyo-eks-cluster"
+  role_arn = aws_iam_role.role-eks-cluster.arn
   version  = "1.25"
 
   vpc_config {
@@ -23,8 +23,8 @@ resource "aws_eks_cluster" "this" {
 
 
 # EKS Cluster IAM Role
-resource "aws_iam_role" "cluster" {
-  name = "${var.project}-Cluster-Role"
+resource "aws_iam_role" "role-eks-cluster" {
+  name = "neyo-eks-cluster-Role"
 
   assume_role_policy = <<POLICY
 {
@@ -44,15 +44,15 @@ POLICY
 
 resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSClusterPolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.cluster.name
+  role       = aws_iam_role.role-eks-cluster.name
 }
 
 
 # EKS Cluster Security Group
 resource "aws_security_group" "eks_cluster" {
-  name        = "${var.project}-cluster-sg"
+  name        = "neyo-eks-cluster-sg"
   description = "Cluster communication with worker nodes"
-  vpc_id      = aws_vpc.this.id
+  vpc_id      = aws_vpc.neyo-capstone-vpc.id
 
   tags = {
     Name = "${var.project}-cluster-sg"
